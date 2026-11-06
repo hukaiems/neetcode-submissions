@@ -1,25 +1,20 @@
 from collections import defaultdict
-
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        big_hash = defaultdict(list)
+
+        for w in strs:
+            temp_hash = [0] * 26
+            for c in w:
+                temp_hash[ord(c) - ord('a')] += 1
+            
+            
+            big_hash[tuple(temp_hash)].append(w)
         
-        # every anagram will have same letter and can be the key to search in hashmap
-        # a defaultdict can auto matically initilize an empty list for us.
-        anagram_hash = defaultdict(list)
-        answer = []
+        res = []
 
-        # How cause they have different order, python can sort the character in alphabet order to be the key
+        for key, value in big_hash.items():
+            res.append(value)
 
-        for char in strs:
-            # one more thing that hash is immutable so things like list has to be changed type.
-            sorted_char = tuple(sorted(char))
-            anagram_hash[sorted_char].append(char)
-
-        # a for loop to iterate and take key value out of the hashmap
-        for value in anagram_hash.values():
-            answer.append(value)
-        
-        return answer
-
-# Time O(n)
-# Space O(n^2)
+        return res
+                
