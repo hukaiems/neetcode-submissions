@@ -1,17 +1,20 @@
+from collections import defaultdict
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # base case
+        # edge cases
         if len(s) != len(t):
             return False
-        # first way using dict to compare
-        s_dict, t_dict = {}, {}
+
+        s_hashmap = defaultdict(int)
+        t_hashmap = defaultdict(int)
 
         for c in s:
-            s_dict[c] = s_dict.get(c, 0) + 1
-        for t in t:
-            t_dict[t] = t_dict.get(t, 0) + 1
+            s_hashmap[c] += 1
         
-        if (s_dict != t_dict):
-            return False
-        print(s_dict, t_dict)
-        return True
+        for c in t:
+            t_hashmap[c] += 1
+
+        return s_hashmap == t_hashmap
+
+# Time: O(N)
+# Space: O(1) -> since only 26 characters
