@@ -1,15 +1,15 @@
+from collections import defaultdict
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        # we will use a defaultdict{sorted(tuple): list}. 
+        big_hash = defaultdict(list)
 
-        dic = defaultdict(list)
-        # a loop to get all result
         for w in strs:
-            key = tuple( sorted(list(w)) )
-            dic[key].append(w)
+            temp_hash = [0] * 26
+            for c in w:
+                temp_hash[ord(c) - ord('a')] += 1
+            
+            
+            big_hash[tuple(temp_hash)].append(w)
         
-        res = []
-        for l in dic.values():
-            res.append(l)
-
-        return res
+        return list(big_hash.values())
+                
