@@ -1,30 +1,15 @@
+from collections import defaultdict
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        s_hashmap = defaultdict(int)
+        t_hashmap = defaultdict(int)
 
-        "use a hash map for both"
-
-        s_hash = defaultdict(int)
-        t_hash = defaultdict(int)
-        
         for c in s:
-            s_hash[c] += 1
-
-        for c in t:
-            t_hash[c] += 1
-            
-        if s_hash == t_hash:
-            return True
-        else:
-            return False
-
-        # # sort the str so it has the correct order to become a key
-        # sorted_s = sorted(s)
-        # # append into hashmap
-        # sorted_t = sorted(t)
-
-        # if sorted_t == sorted_s:
-        #     return True
+            s_hashmap[c] += 1
         
-        # return False
-# Time: O(NlogN)
-# Space: O(N)
+        for c in t:
+            t_hashmap[c] += 1
+
+        if s_hashmap == t_hashmap:
+            return True
+        return False
